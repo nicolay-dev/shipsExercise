@@ -1,2 +1,13 @@
-<app-header></app-header>
-<app-dashboard></app-dashboard>
+<div class="header">
+  <a class="logo">ships project</a>
+  <div class="header-right">
+    <a href="#dashboard" (click)="isDashboardView(true)">dashboard</a>
+    <a href="#details" (click)="isDashboardView(false)">details</a>
+  </div>
+</div>
+
+<app-dashboard *ngIf="dashboard;else details"></app-dashboard>
+
+<ng-template #details>
+  <app-details #details></app-details>
+</ng-template>
