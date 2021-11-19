@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<app-dashboard *ngIf="dashboard;else details"></app-dashboard>
+<app-dashboard *ngIf="dashboard;else details" [ships]="ships"></app-dashboard>
 
 <ng-template #details>
   <app-details #details></app-details>

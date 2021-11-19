@@ -1,1 +1,7 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="card" *ngFor="let ship of ships">
+        <img src="{{ship.image}}" alt="{{ship.ship_name}}">
+        <h3>{{ship.ship_id}}</h3>
+        <p>{{ship.ship_name}}</p>
+    </div>
+</div>
