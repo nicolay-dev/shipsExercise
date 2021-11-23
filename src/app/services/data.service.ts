@@ -1,18 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { IShip } from '../models/ship.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  // private urlApi = 'https://api.spacexdata.com/v3/ships';
-  private urlApi = 'https://ships2.free.beeceptor.com/';
 
-  constructor(private http: HttpClient) {}
+  ships$ = new BehaviorSubject<Array<IShip>>(new Array());
 
-  getShips(): Observable<Array<IShip>> {
-    return this.http.get<Array<IShip>>(this.urlApi + '', {});
+  constructor(private http: HttpClient) {
+    this.getShips();
+  }
+
+  private getShips(): void {
+    this.http.get<Array<IShip>>(environment.urlApi + '', {}).subscribe((response)=>{
+      this.ships$.next(response);
+    });
   }
 }
