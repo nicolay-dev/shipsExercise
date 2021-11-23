@@ -61,6 +61,14 @@ export class ChartComponent implements OnInit, OnDestroy {
         title: {
           text: 'Ships',
         },
+        xAxis: {
+          type: 'category'
+        },
+        yAxis: {
+          title: {
+              text: 'Weight in Kg'
+          }
+        },
         credits: {
           enabled: false,
         },
