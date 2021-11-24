@@ -1,5 +1,5 @@
 <div class="list">
     <ng-container *ngFor="let ship of ships">
-        <p (click)="onChange(ship)"><input #checkBox type="checkbox" [checked]="ship.check">{{ship.ship_id}}</p>
+        <p (click)="onChange(ship)" style="cursor: pointer;"><input #checkBox type="checkbox" [checked]="ship.check">{{ship.ship_id}}</p>
     </ng-container>0
 </div>

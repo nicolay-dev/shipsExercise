@@ -1,7 +1,14 @@
 <div class="container">
-    <div class="card" *ngFor="let ship of ships">
-        <img src="{{ship.image}}" alt="{{ship.ship_name}}">
+    <div class="card" style="cursor: help;"  *ngFor="let ship of ships" title="{{ship.ship_id}} weigth: {{ship.weight_lbs | kilograms}} Kg">
+        <ng-container *ngIf="ship.image; else noImageTemplate">
+            <img src="{{ship.image}}" alt="{{ship.ship_name}}">
+        </ng-container>
         <h3>{{ship.ship_id}}</h3>
         <p>{{ship.ship_name}}</p>
     </div>
 </div>
+
+
+<ng-template #noImageTemplate>
+    <img src="../../../assets/img/noImage.jpg" alt="No Imagen Available">
+</ng-template>

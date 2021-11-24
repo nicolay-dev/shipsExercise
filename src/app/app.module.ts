@@ -8,6 +8,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListShipsComponent } from './components/list-ships/list-ships.component';
+import { KilogramsPipe } from './pipes/kilograms.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ListShipsComponent } from './components/list-ships/list-ships.component
     DashboardComponent,
     DetailsComponent,
     ChartComponent,
-    ListShipsComponent
+    ListShipsComponent,
+    KilogramsPipe
   ],
   imports: [
     BrowserModule,

@@ -72,6 +72,15 @@ export class ChartComponent implements OnInit, OnDestroy {
         credits: {
           enabled: false,
         },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y}Kg'
+                }
+            }
+        },
         series: [
           {
             name: 'Selected Ships',

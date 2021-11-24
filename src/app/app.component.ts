@@ -9,7 +9,7 @@ export class AppComponent {
 
   title = 'shipsExercise';
   /**Used to switch between views */
-  dashboard = false;
+  dashboard = true;
 
   constructor() {
   }

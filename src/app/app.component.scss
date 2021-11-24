@@ -6,7 +6,7 @@ max-height: 100%;
 .header {
   overflow: hidden;
   background-color: white;
-  padding: 20px 10px;
+  padding: 45px 10px;
   text-transform: uppercase;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -50,15 +50,18 @@ max-height: 100%;
   display: flex;
   flex-wrap: wrap;    
   flex-direction: row;
+  align-items: self-start;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .sub-container{
   padding: 0.5rem;
+  margin: 0.5rem;
   flex: 25%;
   align-items: center;
-  text-align: center;
+  border: gray 1px solid;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .list-container{
@@ -66,25 +69,26 @@ max-height: 100%;
   flex-wrap: nowrap;
 }
 
+
 .card{
   padding: 0.5rem;
+  margin: 10px;
   display: flex;
   flex: 25%;
   align-items: center;
+  border: gray 1px solid;
   text-align: center;
-  /* max-width: 25%; */
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .list{
   min-height: 100%;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
 }
 
 img{
   /* align-self: center; */
-  max-width: 75%;
+  max-width: 65%;
 }
   
   /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
