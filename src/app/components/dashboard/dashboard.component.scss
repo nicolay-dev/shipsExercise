@@ -4,18 +4,16 @@
     flex-direction: row;
     flex-wrap: nowrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-end;
 
     .form-container{
+        margin: 10px;
+        display: flex;
+        flex-direction: row-reverse;
 
         &__input {
             padding: 10px 5px;
         }
-
-        margin: 10px;
-        display: flex;
-        flex-direction: row-reverse;
-        width: auto;
 
         &__mat-form-field {
             width: 100%;
@@ -33,7 +31,8 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        flex: 5%;
+        flex-shrink: 6;
+        flex-basis: fit-content;
 
         &__card{
             width: 30%;

@@ -1,6 +1,6 @@
 <section class="dashboard">
     <div class="ships-list">
-        <mat-card class="ships-list__card" *ngFor="let ship of ships">
+        <mat-card class="ships-list__card" *ngFor="let ship of searchResults">
             <ng-container *ngIf="ship.image; else noImageTemplate">
                 <img class="ships-list__image" src="{{ship.image}}" alt="{{ship.ship_name}}">
             </ng-container>
@@ -21,8 +21,7 @@
                 </mat-select>
             </mat-form-field>
             <div class="form-container__buttons">
-                <button mat-button color="primary">Buscar</button>
-                <button mat-button color="accent" (click)="resetFilter()">Reset Filtro</button>
+                <button mat-button color="primary" (click)="resetFilter()">Reset Filtro</button>
             </div>
         </form>
     </div>

@@ -14,8 +14,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   dataSuscription!: Subscription;
   ships = new Array<IShip>();
+  searchResults = new Array<IShip>();
   type = '';
-  searchResults = ''
+  searchResults$ = new Observable<any>();
   formGroup: FormGroup = this.formBuilder.group({
     searchShip: ['', ],
     selectedOption: [''],
@@ -28,26 +29,32 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getShips();
-    /* this.searchResults$ = this.formGroup.valueChanges
-      .pipe(
-        switchMap(searchString => this.searchService.search(searchString))
-      ) */
+    this.searchResults$ = this.formGroup.valueChanges;
+    this.searchResults$.subscribe((value) => {this.searchShip(value)});
   }
 
-  getShips = () => this.dataSuscription = this.dataService.getShips().subscribe((ships) => {this.ships = ships});
+  getShips = () => this.dataSuscription = this.dataService.getShips().subscribe((ships) => {
+    this.ships = ships;
+    this.searchResults = this.ships;
+  });
 
   getTypes = () => { return ['Cargo', 'Barge', 'Tug' , 'High Speed Craft']};
 
   setShips = ( newShips : Array<IShip>) => {return this.ships = _.cloneDeep(newShips)};
 
-  filterShips = (type : string) => this.ships = this.dataService.filterByType(this.ships, type);
+  filterShips = (type : string) => this.searchResults = this.dataService.filterByType(this.ships, type);
 
   resetFilter = () => this.getShips();  
 
   searchShip(value : string){
-    this.ships = _.filter(this.ships, (element)=> {
-      return _.lowerCase(element.ship_id) === _.lowerCase(value)
-    });
+    const newValue = _.get(value, 'searchShip');
+    if(newValue){
+      this.searchResults = _.filter(this.ships, (element)=> {
+        return _.startsWith(_.toLower(element.ship_id) , _.toLower(newValue))
+      });
+    }else {
+      this.searchResults = this.ships;
+    }
   }
 
   onSubmit() {
