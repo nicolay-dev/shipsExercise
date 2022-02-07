@@ -1,29 +1,34 @@
 <section class="dashboard">
-    <div>
-        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" appearance="fill">
-            <span>Filter by Type:</span>
-            <mat-select formControlName="selectedOption" (ngModelChange)="this.filterShips($event)">
-                <mat-option [value]="item" *ngFor="let item of this.getTypes()"> {{ item }}
-                </mat-option>
-            </mat-select>
-            <input matInput type="text" placeholder='Buscar' formControlName="searchShip">
-            <button mat-button color="primary">Buscar</button>
-            <button mat-button color="accent" (click)="resetFilter()">Reset Filtro</button>
-        </form>
-    </div>
-    <div class="dashboard_list">
-        <div mat-card-content class="card" style="cursor: help;" *ngFor="let ship of ships"
-            title="{{ship.ship_id}} weigth: {{ship.weight_lbs | kilograms}} Kg">
+    <div class="ships-list">
+        <mat-card class="ships-list__card" *ngFor="let ship of ships">
             <ng-container *ngIf="ship.image; else noImageTemplate">
-                <img src="{{ship.image}}" alt="{{ship.ship_name}}">
+                <img class="ships-list__image" src="{{ship.image}}" alt="{{ship.ship_name}}">
             </ng-container>
-            <h3>{{ship.ship_id}}</h3>
+            <h3 title="{{ship.ship_id}} weigth: {{ship.weight_lbs | kilograms}} Kg"
+            class="ships-list__title-id">{{ship.ship_id}}</h3>
             <p>{{ship.ship_name}}</p>
-        </div>
+        </mat-card>
+    </div>
+    <div class="form-container">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <mat-label class="form-container__input">Filtros:</mat-label>
+            <input class="form-container__input" matInput type="text" placeholder="Buscar por nombre" formControlName="searchShip">
+            <mat-form-field class="form-container__mat-form-field" appearance="fill">
+                <mat-label>Filter by Type:</mat-label>
+                <mat-select formControlName="selectedOption" (ngModelChange)="this.filterShips($event)">
+                    <mat-option [value]="item" *ngFor="let item of this.getTypes()"> {{ item }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="form-container__buttons">
+                <button mat-button color="primary">Buscar</button>
+                <button mat-button color="accent" (click)="resetFilter()">Reset Filtro</button>
+            </div>
+        </form>
     </div>
 </section>
 
 
 <ng-template #noImageTemplate>
-    <img src="../../../assets/img/noImage.jpg" alt="No Imagen Available">
+    <img class="ships-list__image" src="../../../assets/img/noImage.jpg" alt="No Imagen Available">
 </ng-template>

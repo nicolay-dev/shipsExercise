@@ -1,11 +1,63 @@
 
-.dashboard{
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
 
-    @include flex(flex-start, flex-start, column);
+    .form-container{
 
-    &__list{
-        @include flex(flex-start, flex-start, column);
+        &__input {
+            padding: 10px 5px;
+        }
+
+        margin: 10px;
+        display: flex;
+        flex-direction: row-reverse;
+        width: auto;
+
+        &__mat-form-field {
+            width: 100%;
+        }
+
+        &__buttons {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-around;
+        }
     }
+
+    .ships-list{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex: 5%;
+
+        &__card{
+            width: 30%;
+            padding: 0.5rem;
+            margin: 10px;
+            display: flex;
+            
+            align-items: center;
+            border: gray 1px solid;
+            text-align: center;
+            flex-direction: column;
+            justify-content: space-evenly;;
+        }
+
+        &__title-id{
+            cursor: help;
+        }
+
+        &__image {
+            max-width: 70%;
+            max-height: 70%;
+        }
+    }
+
 }
 
 .card{
