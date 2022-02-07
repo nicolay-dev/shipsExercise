@@ -6,4 +6,5 @@ export interface IShip{
     weight_lbs:number;
     image?:string;
     check:boolean;
+    ship_type: 'Cargo' | 'Barge' | 'Tug' | 'High Speed Craft';
 }

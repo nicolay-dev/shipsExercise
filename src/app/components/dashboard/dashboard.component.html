@@ -1,12 +1,27 @@
-<div class="container">
-    <div class="card" style="cursor: help;"  *ngFor="let ship of ships" title="{{ship.ship_id}} weigth: {{ship.weight_lbs | kilograms}} Kg">
-        <ng-container *ngIf="ship.image; else noImageTemplate">
-            <img src="{{ship.image}}" alt="{{ship.ship_name}}">
-        </ng-container>
-        <h3>{{ship.ship_id}}</h3>
-        <p>{{ship.ship_name}}</p>
+<section class="dashboard">
+    <div>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" appearance="fill">
+            <span>Filter by Type:</span>
+            <mat-select formControlName="selectedOption" (ngModelChange)="this.filterShips($event)">
+                <mat-option [value]="item" *ngFor="let item of this.getTypes()"> {{ item }}
+                </mat-option>
+            </mat-select>
+            <input matInput type="text" placeholder='Buscar' formControlName="searchShip">
+            <button mat-button color="primary">Buscar</button>
+            <button mat-button color="accent" (click)="resetFilter()">Reset Filtro</button>
+        </form>
     </div>
-</div>
+    <div class="dashboard_list">
+        <div mat-card-content class="card" style="cursor: help;" *ngFor="let ship of ships"
+            title="{{ship.ship_id}} weigth: {{ship.weight_lbs | kilograms}} Kg">
+            <ng-container *ngIf="ship.image; else noImageTemplate">
+                <img src="{{ship.image}}" alt="{{ship.ship_name}}">
+            </ng-container>
+            <h3>{{ship.ship_id}}</h3>
+            <p>{{ship.ship_name}}</p>
+        </div>
+    </div>
+</section>
 
 
 <ng-template #noImageTemplate>

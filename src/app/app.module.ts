@@ -9,6 +9,13 @@ import { DetailsComponent } from './components/details/details.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListShipsComponent } from './components/list-ships/list-ships.component';
 import { KilogramsPipe } from './pipes/kilograms.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +29,14 @@ import { KilogramsPipe } from './pipes/kilograms.pipe';
   imports: [
     BrowserModule,
     HttpClientModule,
-    ChartModule
+    ChartModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
