@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as _ from 'lodash';
 import { IShip } from '../models/ship.model';
+import { toLower } from 'lodash';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +18,12 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   private consumeApi = (url : string) => this.http.get(url + '', {});
+
+  getUser(user:string, password : string): Observable<any> {
+    const isUserValid = _.toLower(user) === 'holamundo';
+    const isvaidPs = password === 'holamundo';
+    return of(isUserValid && isvaidPs);
+  }
 
   getShips(): Observable<any> {
     return this.consumeApi(environment.urlApi);

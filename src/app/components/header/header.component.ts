@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,15 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   title = 'shipsExercise';
   /**Used to switch between views */
-  dashboard = true;
 
-  constructor() { }
+  constructor(private routerNav: Router) { }
 
   ngOnInit(): void {
   }
 
-  isDashboardView(state: boolean){
-    this.dashboard = state;
+  redirect(state: boolean){
+    state 
+    ? this.routerNav.navigate(['dashboard'])
+    : this.routerNav.navigate(['details']);
   }
 
 }

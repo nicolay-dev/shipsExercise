@@ -9,7 +9,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { ListShipsComponent } from './components/list-ships/list-ships.component';
 import { KilogramsPipe } from './pipes/kilograms.pipe';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
@@ -44,7 +44,7 @@ import { HeaderComponent } from './components/header/header.component';
     MatInputModule,
     MatCardModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

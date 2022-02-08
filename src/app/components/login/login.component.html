@@ -1,1 +1,19 @@
-<p>login works!</p>
+<section class="login-container">
+    <mat-card class="box card-container">
+        <mat-card-header class="card-container__header">
+          <mat-card-title class="card-container__title">Iniciar sesión</mat-card-title>
+          <img class="card-container__image" src="../../../assets/img/shipImage.svg">
+        </mat-card-header>
+        <form [formGroup]="formGroup" (ngSubmit)="login()" class="card-container__form">
+          <mat-card-content class="card-container__inputs">
+            <mat-form-field>
+              <input type="text" matInput placeholder="Usuario" formControlName="username" >
+            </mat-form-field>
+            <mat-form-field>
+              <input password matInput placeholder="Contraseña" type="password" formControlName="password">
+            </mat-form-field>
+          </mat-card-content>
+          <button type="submit" [disabled]="!formGroup.valid" mat-stroked-button color="accent" class="btn-block">Iniciar Sesión</button>
+        </form>
+      </mat-card>
+</section>

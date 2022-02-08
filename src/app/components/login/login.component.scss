@@ -1,1 +1,45 @@
 
+.login-container {
+    display: flex;
+    margin: 10px;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 75%;
+    align-items: center;
+
+    .card-container {
+
+        width: 300px;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        
+        &__form{
+            display: flex;
+            flex-direction: column;
+        }
+        &__inputs {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__image{
+            flex: 1;
+            max-width: 70%;
+            max-height: 70%;
+        }
+        &__header {
+            display: flex;
+            flex-direction: row;
+            max-height: 80px;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        &__title {
+            flex: 2;
+            margin: 0;
+        }
+    }
+}

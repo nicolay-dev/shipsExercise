@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.searchResults = this.ships;
   });
 
-  getTypes = () => { return ['Cargo', 'Barge', 'Tug' , 'High Speed Craft']};
+  getTypes = () => { return ['--Seleccionar--','Cargo', 'Barge', 'Tug' , 'High Speed Craft']};
 
   filterShips(value : string){
     const searchValue = _.get(value, 'searchShip');
@@ -53,9 +53,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const isFilter = filtervalue !== '';
     if (isSearch) {
       this.searchShips(searchValue);
-    } if (isFilter) {
-      this.filterByType(filtervalue);
-    } if (!isSearch && !isFilter) {
+    } else if (isFilter) {
+      filtervalue === '--Seleccionar--' ? this.searchResults = this.ships : this.filterByType(filtervalue);
+    } else if (!isSearch && !isFilter) {
       this.searchResults = this.ships;
     }
   }
@@ -70,7 +70,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
   }
 
-  resetFilter = () => this.getShips();
+  resetFilter = () => {
+    this.searchResults = this.ships;
+    _.set(this.formGroup.value, 'selectedOption', '--Seleccionar--');
+  }
 
   ngOnDestroy(){
     if (this.dataSuscription) {
@@ -85,16 +88,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 // observable -> OK
 // Styles
 // Actualizar a form reactivo -> OK
-// Angular Material -> ok
-
-//(click)="searchShip(this.formGroup.value.searchShip)"
+// Angular Material -> OK
 
 /* 
 operador ternario OK
 quitar ngModel OK
 
-arreglar segunda visita
-material en segunda vista
+arreglar segunda visita OK
+material en segunda vista OK
+login OK
 
 unitTest
 
