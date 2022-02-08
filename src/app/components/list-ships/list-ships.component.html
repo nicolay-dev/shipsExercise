@@ -1,5 +1,7 @@
-<div class="list">
-    <ng-container *ngFor="let ship of ships">
-        <p (click)="updateSelections(ship)" style="cursor: pointer;"><input #checkBox type="checkbox" [checked]="ship.check">{{ship.ship_id}}</p>
-    </ng-container>
-</div>
+<mat-card class="card-list">
+    <div class="card-list__item" *ngFor="let ship of ships"
+        (click)="updateSelections(ship)">
+        <input #checkBox type="checkbox" [checked]="ship.check">
+        <span>{{ship.ship_id}}</span>
+    </div>
+</mat-card>

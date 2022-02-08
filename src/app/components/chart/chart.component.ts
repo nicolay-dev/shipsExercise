@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
+  styleUrls: ['./chart.component.scss'],
 })
 
 export class ChartComponent implements OnInit, OnDestroy {
@@ -20,55 +20,53 @@ export class ChartComponent implements OnInit, OnDestroy {
   /**List of ships */
   ships = new Array<IShip>();
   getDataServiceSus!: Subscription;
+  getCheckedShipsSus!: Subscription;
   /**Data charged to the chart */
   dataChart = new Array();
   chart = new Chart();
   chartType = false;
 
   constructor(private dataService: DataService) {}
-  
+
+  ngOnInit(): void {
+    this.chart = new Chart();
+    this.getDataServiceSus = this.dataService.getShips().subscribe((ships) => {
+      this.ships = ships;
+      this.createChart('Ships', 'column');
+      this.repaintChart('column', true);
+    });
+    this.getCheckedShipsSus = this.dataService.getCheckedShipsO().subscribe((shipsChecked) => {
+      this.ships = shipsChecked;
+      this.repaintChart(this.getCharType(), false);
+    })
+  }
+
   getCharType = (): 'line' | 'column' => {
     if (this.chartType){
       return 'line';
     } else {
       return 'column'
   }}
-  
-  setShips(ship : Array<IShip>) {
-    this.ships = ship;
-    this.repaintChart(this.dataChart, this.getCharType());
-  } 
 
-  ngOnInit(): void {
-    this.getDataServiceSus = this.dataService.getShips().subscribe((ships) => {this.ships = ships});
-    /* this.initObservables(); */
-  }
-
-  /**
-   * Switch between columns and lines
-   */
-  switchType() {
-    this.chartType = !this.chartType;
-    this.repaintChart(this.dataChart, this.getCharType());
-  }
-
-  repaintChart(data : Array<any>, type : 'line' | 'column'): void {
+  repaintChart(type : 'line' | 'column', isAllShips? : boolean): void {
     if(_.first(this.ships)){
-      this.loadDataToChart(this.ships);
-      this.createChart('Selected Ships', data, type);
+      this.loadDataToChart(this.ships, isAllShips);
+      this.updateChart('Selected Ships', type);
     }
   }
 
-  loadDataToChart = (shipsList : Array<IShip>) => {
+  loadDataToChart = (shipsList : Array<IShip>, allShips? : boolean) => {
     _.remove(this.dataChart);
     shipsList.forEach((ship)=>{
-      if (ship.check)
+      if (allShips) {
         this.dataChart.push({name: _.clone(ship.ship_name), y: ship.weight_lbs * environment.conversionFactor})
+      }else if (ship.check) {
+          this.dataChart.push({name: _.clone(ship.ship_name), y: ship.weight_lbs * environment.conversionFactor})
+      }
     });
   }
 
-  createChart = (name : string, data : Array<any>, type : 'line' | 'column') => {
-    this.chart.destroy();
+  createChart = (name : string, type : 'line' | 'column') => {
     this.chart = new Chart({
       chart: {
         type: 'line',
@@ -99,11 +97,24 @@ export class ChartComponent implements OnInit, OnDestroy {
       series: [
         {
           name: name,
-          data: data,
+          data: this.dataChart,
           type: type,
         },
       ],
     });
+  }
+
+  updateChart (name:string, type : 'line' | 'column') {
+    _.set(this.chart, 'series', [{
+      name: name,
+      data: this.dataChart,
+      type: type,
+    }]);
+  }
+
+  switchType() {
+    this.chartType = !this.chartType;
+    this.repaintChart(this.getCharType(), false);
   }
 
   ngOnDestroy() {

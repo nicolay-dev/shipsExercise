@@ -1,6 +1,6 @@
-<div class="container" style="flex-wrap: nowrap;">
-    <div class="sub-container" [chart]="chart"></div>
-    <div class="sub-container">
+<mat-card class="card-chart"> 
+    <div class="card-chart__chart" [chart]="chart"></div>
+    <div class="card-chart__buttons">
         <button mat-button (click)="switchType()">Switch Type</button>
     </div>
-</div>
+</mat-card>

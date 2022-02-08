@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   searchResults = new Array<IShip>();
   type = '';
   searchResults$ = new Observable<any>();
+  filterType$ = new Observable<any>();
   formGroup: FormGroup = this.formBuilder.group({
     searchShip: ['', ],
     selectedOption: [''],
@@ -29,8 +30,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getShips();
+    this.initObservables();
+  }
+
+  initObservables() {
     this.searchResults$ = this.formGroup.valueChanges;
-    this.searchResults$.subscribe((value) => {this.searchShip(value)});
+    this.filterType$ = this.formGroup.valueChanges;
+    this.searchResults$.subscribe((value) => {this.filterShips(value)});
   }
 
   getShips = () => this.dataSuscription = this.dataService.getShips().subscribe((ships) => {
@@ -40,27 +46,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getTypes = () => { return ['Cargo', 'Barge', 'Tug' , 'High Speed Craft']};
 
-  setShips = ( newShips : Array<IShip>) => {return this.ships = _.cloneDeep(newShips)};
-
-  filterShips = (type : string) => this.searchResults = this.dataService.filterByType(this.ships, type);
-
-  resetFilter = () => this.getShips();  
-
-  searchShip(value : string){
-    const newValue = _.get(value, 'searchShip');
-    if(newValue){
-      this.searchResults = _.filter(this.ships, (element)=> {
-        return _.startsWith(_.toLower(element.ship_id) , _.toLower(newValue))
-      });
-    }else {
+  filterShips(value : string){
+    const searchValue = _.get(value, 'searchShip');
+    const filtervalue = _.get(value, 'selectedOption');
+    const isSearch = searchValue !== '';
+    const isFilter = filtervalue !== '';
+    if (isSearch) {
+      this.searchShips(searchValue);
+    } if (isFilter) {
+      this.filterByType(filtervalue);
+    } if (!isSearch && !isFilter) {
       this.searchResults = this.ships;
     }
   }
 
-  onSubmit() {
-      this.searchShip(_.get(this.formGroup.value, 'searchShip'));
-      /* this.filterShips(_.get(this.formGroup.value, 'selectedOption')); */
+  filterByType = (type : string) => {
+    this.searchResults = this.dataService.filterByType(this.ships, type);
   }
+
+  searchShips (value : string) {
+      this.searchResults = _.filter(this.ships, (element) => {
+        return _.startsWith(_.toLower(element.ship_id), _.toLower(value));
+      });
+  }
+
+  resetFilter = () => this.getShips();
 
   ngOnDestroy(){
     if (this.dataSuscription) {
@@ -78,3 +88,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
 // Angular Material -> ok
 
 //(click)="searchShip(this.formGroup.value.searchShip)"
+
+/* 
+operador ternario OK
+quitar ngModel OK
+
+arreglar segunda visita
+material en segunda vista
+
+unitTest
+
+
+proponer cosas para repasar conceptos
+repasar directivas perzonalizadas
+ */

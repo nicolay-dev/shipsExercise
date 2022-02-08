@@ -8,30 +8,29 @@ import { ChartComponent } from '../chart/chart.component';
 @Component({
   selector: 'app-list-ships',
   templateUrl: './list-ships.component.html',
-  styleUrls: ['../../app.component.scss']
+  styleUrls: ['./list-ships.component.scss']
 })
 export class ListShipsComponent implements OnInit,  OnDestroy {
 
-  dataSuscription!: Subscription;
+  getShipsSus!: Subscription;
   /**List of ships */
   ships = new Array<IShip>();
 
   constructor(
     private dataService: DataService,
-    private chartComponet: ChartComponent,
     ) {}
 
   ngOnInit(): void {
-    this.initSuscritions();
+    this.initSuscriptions();
   }
 
-  initSuscritions() {
-    this.dataSuscription = this.dataService.getShips().subscribe((ships) => {this.ships = ships});
+  initSuscriptions() {
+    this.getShipsSus = this.dataService.getShips().subscribe((ships) => {this.ships = ships});
   }
 
   updateSelections(ship:IShip){
     ship.check = !ship.check;
-    this.chartComponet.setShips(this.ships);
+    this.dataService.updateCheckedShips(this.ships);
   }
 
   updateShipSelected(ship:IShip) {
@@ -43,8 +42,8 @@ export class ListShipsComponent implements OnInit,  OnDestroy {
   }
 
   ngOnDestroy(){
-    if (this.dataSuscription) {
-      this.dataSuscription.unsubscribe();
+    if (this.getShipsSus) {
+      this.getShipsSus.unsubscribe();
     }
   }
 }

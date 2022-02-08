@@ -1,0 +1,14 @@
+.detail-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    &__list {
+        flex: 1;
+    }
+
+    &__chart {
+        flex: 4;
+    }
+}

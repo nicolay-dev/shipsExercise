@@ -1,0 +1,16 @@
+
+.card-list {
+  margin: 10px;
+  min-width: 20%;
+  min-height: 100%;
+
+  &__item {
+    padding: 6px 2px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    cursor: pointer;
+  }
+}

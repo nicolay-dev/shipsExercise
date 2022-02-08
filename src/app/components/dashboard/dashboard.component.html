@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <section class="dashboard">
     <div class="ships-list">
         <mat-card class="ships-list__card" *ngFor="let ship of searchResults">
@@ -10,18 +12,18 @@
         </mat-card>
     </div>
     <div class="form-container">
-        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <form [formGroup]="formGroup" (ngSubmit)="resetFilter()">
             <mat-label class="form-container__input">Filtros:</mat-label>
             <input class="form-container__input" matInput type="text" placeholder="Buscar por nombre" formControlName="searchShip">
             <mat-form-field class="form-container__mat-form-field" appearance="fill">
                 <mat-label>Filter by Type:</mat-label>
-                <mat-select formControlName="selectedOption" (ngModelChange)="this.filterShips($event)">
+                <mat-select formControlName="selectedOption">
                     <mat-option [value]="item" *ngFor="let item of this.getTypes()"> {{ item }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <div class="form-container__buttons">
-                <button mat-button color="primary" (click)="resetFilter()">Reset Filtro</button>
+                <button mat-button color="primary">Reset Filtro</button>
             </div>
         </form>
     </div>

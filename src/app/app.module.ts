@@ -15,6 +15,10 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
+import { LoginComponent } from './components/login/login.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -24,7 +28,9 @@ import {MatCardModule} from '@angular/material/card';
     DetailsComponent,
     ChartComponent,
     ListShipsComponent,
-    KilogramsPipe
+    KilogramsPipe,
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,9 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     MatButtonModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
