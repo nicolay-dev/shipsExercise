@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  title = 'shipsExercise';
   /**Used to switch between views */
 
   constructor(private routerNav: Router) { }

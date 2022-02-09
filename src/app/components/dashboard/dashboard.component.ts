@@ -103,4 +103,11 @@ unitTest
 
 proponer cosas para repasar conceptos
 repasar directivas perzonalizadas
+
+
+
+agregar autentication para navegación
+componente para crear usuarios
+validaión usuario
+libreria ngrx -> store
  */

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { Subject} from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private dataService: DataService,
-    private routerNav: Router
+    private routerNav: Router,
+    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
   initFormObservable () {
     this.loginSuccess$.subscribe((res) => {
       if(res) {
+        this.authService.setLogin(res);
         this.routerNav.navigate(['dashboard']);
       }else{
         alert('Ingrese datos validos');

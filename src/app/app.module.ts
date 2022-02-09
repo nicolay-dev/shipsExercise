@@ -16,9 +16,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import { LoginComponent } from './components/login/login.component';
-import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AppRoutingModule } from './components/application/app-routing/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { HeaderComponent } from './components/header/header.component';
     MatCardModule,
     AppRoutingModule,
     RouterModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
