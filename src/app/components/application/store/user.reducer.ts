@@ -11,17 +11,20 @@ export interface AppState {
 export const intiAppState : AppState = {
   loginUser : {
     username: '',
-    password: ''
+    password: '',
+    rol: ''
   },
-  userList : [{username : 'holamundo', password : 'holamundo'}]
+  userList : [{username : 'holamundo', password : 'holamundo', rol: 'admin'}]
 };
 
   export const managerUserReducer = createReducer(
     intiAppState,
     on(loginActions.loginAction, (state, { user }) => {
       let newState : AppState = _.cloneDeep(state);
-      if (isValidUser(user, state)) {
-        newState.loginUser = user
+      let foundUser = isValidUser(user, state);
+      if (foundUser) {
+        newState.loginUser = user;
+        _.set(newState.loginUser, 'rol', foundUser.rol);
       }return newState;
     }),
     on(loginActions.addUser, (state, { user }) => {
@@ -36,11 +39,10 @@ export const intiAppState : AppState = {
       return newState;
   }));
 
-  function isValidUser(user : User, state: AppState) : boolean {
-    let isValidUserVar = false;
-    let userFound = _.find(state.userList, (item) => _.isEqual(item, user));
-    userFound ? isValidUserVar = true : isValidUserVar = false;
-    return isValidUserVar;
+  function isValidUser(user : User, state: AppState) {
+    let userFound = _.find(state.userList, 
+      (item) => _.isEqual(item.username, user.username) && _.isEqual(item.password, user.password));
+    return userFound;
   }
 
   function isFoundUser (user : User, state: AppState) : boolean {

@@ -23,6 +23,9 @@ export class UserManagerComponent implements OnInit {
     password: ['', [
       Validators.required,
       Validators.minLength(8)
+    ]],
+    rol: ['', [
+      Validators.required,
     ]]
   });
 
@@ -44,6 +47,7 @@ export class UserManagerComponent implements OnInit {
         user: {
           username: _.get(this.formGroup.value, 'username'),
           password: _.get(this.formGroup.value, 'password'),
+          rol: _.get(this.formGroup.value, 'rol'),
         },
       })
     );

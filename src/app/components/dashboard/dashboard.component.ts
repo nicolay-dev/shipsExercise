@@ -109,8 +109,8 @@ repasar directivas perzonalizadas
 unitTest ?
 
 
-rutas hijas del login
-selector para traer la lista
+rutas hijas del login OK
+selector para traer la lista 
 directiva custom (estructural) para seleccionar tipo de usuario mostrar o ocultar cosas
 directivas de atributo (comportamiento) -> cambiar color de texto segun rol
 

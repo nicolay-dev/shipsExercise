@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { from, of, Subject } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AppState } from '../application/store/user.reducer';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +15,7 @@ import * as _ from 'lodash';
 })
 export class LoginComponent implements OnInit {
 
-  loginUser: User = {username : '', password : ''};
+  loginUser: User = {username : '', password : '', rol : ''};
 
   formGroup: FormGroup = this.formBuilder.group({
     username: ['', [
@@ -42,7 +41,6 @@ export class LoginComponent implements OnInit {
   initObs () {
     this.store.subscribe(state => {
       this.loginUser = _.get(state.store, 'loginUser');
-      console.log(state);
       if(this.loginUser.username != ''){
         this.routerNav.navigate(['dashboard']);
       }
@@ -51,8 +49,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.store.dispatch(loginActions.loginAction({
-        user: {username: _.get(this.formGroup.value, 'username'),
-        password: _.get(this.formGroup.value, 'password')}
+        user: {
+          username: _.get(this.formGroup.value, 'username'),
+          password: _.get(this.formGroup.value, 'password'),
+          rol: ''
+      }
     }));
   }
 

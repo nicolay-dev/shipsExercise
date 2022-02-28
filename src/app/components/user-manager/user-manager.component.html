@@ -29,6 +29,11 @@
     </mat-card-header>
     <form [formGroup]="formGroup" (ngSubmit)="agregarUsuario()" class="card-container__form">
       <mat-card-content class="card-container__inputs">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol">
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="user">User</mat-option>
+        </mat-select>
         <mat-form-field>
           <input type="text" matInput placeholder="Username" formControlName="username">
         </mat-form-field>
