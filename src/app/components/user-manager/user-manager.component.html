@@ -1,0 +1,43 @@
+<app-header></app-header>
+<section class="add-user-container">
+  <mat-card class="box card-container-users">
+    <mat-card-header class="card-container__header">
+      <mat-card-title class="card-container__title">Lista de Usuarios</mat-card-title>
+    </mat-card-header>
+    <div *ngIf="users" class="list-container">
+      <div class="list-container__row">
+        <div class="list-container__item">
+          <span style="font-weight: bold;">USERNAME</span>
+        </div>
+        <div class="list-container__item">
+          <span style="font-weight: bold;">ACTIONS</span>
+        </div>
+      </div>
+      <div *ngFor="let item of users" class="list-container__row">
+        <div class="list-container__item">
+          <span>{{item.username}}</span>
+        </div>
+        <div class="list-container__item">
+          <button mat-button (click)="deleteUser(item)">Eliminar usuario</button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="card-container">
+    <mat-card-header class="card-container__header">
+      <mat-card-title class="card-container__title">Agregar Usuario</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="formGroup" (ngSubmit)="agregarUsuario()" class="card-container__form">
+      <mat-card-content class="card-container__inputs">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Username" formControlName="username">
+        </mat-form-field>
+        <mat-form-field>
+          <input password matInput placeholder="Contraseña" type="password" formControlName="password">
+        </mat-form-field>
+      </mat-card-content>
+      <button type="submit" [disabled]="!formGroup.valid" mat-stroked-button color="accent" class="btn-block">Agregar
+        Usuario</button>
+    </form>
+  </mat-card>
+</section>

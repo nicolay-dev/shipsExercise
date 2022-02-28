@@ -20,7 +20,15 @@ import { AppRoutingModule } from './components/application/app-routing/app-routi
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { StoreModule } from '@ngrx/store';
+import { UserManagerComponent } from './components/user-manager/user-manager.component';
+import { environment } from 'src/environments/environment';
+import * as reducers from 'src/app/components/application/store/user.reducer';
+import { RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { DashboardModule } from './components/dashboard/dashboard.module';
+import { DetailsModule } from './components/details/details.module';
+import { UserManagerModule } from './components/user-manager/user-manager.module';
 
 @NgModule({
   declarations: [
@@ -31,10 +39,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ListShipsComponent,
     KilogramsPipe,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserManagerComponent
   ],
   imports: [
     BrowserModule,
+    DashboardModule,
+    DetailsModule,
+    UserManagerModule,
     HttpClientModule,
     ChartModule,
     FormsModule,
@@ -47,8 +59,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AppRoutingModule,
     RouterModule,
     MatFormFieldModule,
+    StoreDevtoolsModule.instrument({}),
+    StoreModule.forRoot({ store: reducers.managerUserReducer}),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  
+
+}

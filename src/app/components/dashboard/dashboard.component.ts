@@ -82,32 +82,40 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 }
 
-// filtro según propiedad -> OK
-// search para buscar por nombre -> OK
-// constructor -> OK
-// observable -> OK
-// Styles
-// Actualizar a form reactivo -> OK
-// Angular Material -> OK
-
 /* 
-operador ternario OK
-quitar ngModel OK
 
-arreglar segunda visita OK
-material en segunda vista OK
-login OK
+filtro según propiedad -> OK
+search para buscar por nombre -> OK
+constructor -> OK
+observable -> OK
+Styles -> OK
+Actualizar a form reactivo -> OK
+Angular Material -> OK
 
-unitTest
+operador ternario -> OK
+quitar ngModel -> OK
 
+arreglar segunda visita ?
+material en segunda vista -> OK
+login -> OK
+
+agregar autentication para navegación guards -> OK 
+componente para crear usuarios -> OK
+validaión usuario -> OK
+libreria ngrx -> store -> OK
 
 proponer cosas para repasar conceptos
 repasar directivas perzonalizadas
+unitTest ?
 
 
+rutas hijas del login
+selector para traer la lista
+directiva custom (estructural) para seleccionar tipo de usuario mostrar o ocultar cosas
+directivas de atributo (comportamiento) -> cambiar color de texto segun rol
 
-agregar autentication para navegación
-componente para crear usuarios
-validaión usuario
-libreria ngrx -> store
+repasar funcinamiento servicios
+typescript generics
+rest operator
+
  */

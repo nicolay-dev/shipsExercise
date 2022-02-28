@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { from, of, Subject } from 'rxjs';
+import { User } from 'src/app/models/user.model';
+import { AppState } from '../application/store/user.reducer';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as loginActions from '../application/store/user.actions';
 import * as _ from 'lodash';
-import { Subject} from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { DataService } from 'src/app/services/data.service';
+
 
 @Component({
   selector: 'app-login',
@@ -13,8 +16,8 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class LoginComponent implements OnInit {
 
-  autenticated = new Subject<boolean>();
-  loginSuccess$ = this.autenticated.asObservable();
+  loginUser: User = {username : '', password : ''};
+
   formGroup: FormGroup = this.formBuilder.group({
     username: ['', [
       Validators.required, 
@@ -26,34 +29,31 @@ export class LoginComponent implements OnInit {
     ]]
   });
 
-  constructor(private formBuilder: FormBuilder,
-    private dataService: DataService,
+  constructor(
     private routerNav: Router,
-    private authService: AuthService
-    ) { }
+    private formBuilder: FormBuilder,
+    private store: Store<{store : AppState}>,
+    ) {}
 
   ngOnInit(): void {
-    this.initFormObservable();
+    this.initObs();
   }
 
-  initFormObservable () {
-    this.loginSuccess$.subscribe((res) => {
-      if(res) {
-        this.authService.setLogin(res);
+  initObs () {
+    this.store.subscribe(state => {
+      this.loginUser = _.get(state.store, 'loginUser');
+      console.log(state);
+      if(this.loginUser.username != ''){
         this.routerNav.navigate(['dashboard']);
-      }else{
-        alert('Ingrese datos validos');
       }
     });
   }
 
   login() {
-    this.dataService.getUser(
-      _.get(this.formGroup.value, 'username'),
-      _.get(this.formGroup.value, 'password')
-      ).subscribe((res) => {
-        this.autenticated.next(res);
-    });;
+    this.store.dispatch(loginActions.loginAction({
+        user: {username: _.get(this.formGroup.value, 'username'),
+        password: _.get(this.formGroup.value, 'password')}
+    }));
   }
 
 }
