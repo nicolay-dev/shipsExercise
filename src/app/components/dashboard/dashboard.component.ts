@@ -84,6 +84,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 /* 
 
+selector para traer la lista 
+
 filtro según propiedad -> OK
 search para buscar por nombre -> OK
 constructor -> OK
@@ -110,12 +112,13 @@ unitTest ?
 
 
 rutas hijas del login OK
-selector para traer la lista 
-directiva custom (estructural) para seleccionar tipo de usuario mostrar o ocultar cosas
-directivas de atributo (comportamiento) -> cambiar color de texto segun rol
+directiva custom (estructural) para seleccionar tipo de usuario mostrar o ocultar cosas OK
+directivas de atributo (comportamiento) -> cambiar color de texto segun rol OK
+función logout?
+Serviio de autenticación?
 
 repasar funcinamiento servicios
 typescript generics
-rest operator
+rest operator OK
 
  */

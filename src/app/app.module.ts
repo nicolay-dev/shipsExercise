@@ -29,6 +29,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { DetailsModule } from './components/details/details.module';
 import { UserManagerModule } from './components/user-manager/user-manager.module';
+import { AlterTextDirective } from './directives/alter-text.directive';
+import { RolStatusDirective } from './directives/rol-status.directive';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { UserManagerModule } from './components/user-manager/user-manager.module
     KilogramsPipe,
     LoginComponent,
     HeaderComponent,
-    UserManagerComponent
+    UserManagerComponent,
+    AlterTextDirective,
+    RolStatusDirective
   ],
   imports: [
     BrowserModule,

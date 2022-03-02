@@ -1,8 +1,8 @@
 <div class="header">
-    <a class="logo">ships project</a>
+    <a appAlterText class="logo">ships project</a>
     <div class="header-right">
       <a (click)="redirect('dashboard')">dashboard</a>
       <a (click)="redirect('details')">details</a>
-      <a (click)="redirect('manager')">manager</a>
+      <a *appRolStatus="rol" (click)="redirect('manager')">manager</a>
     </div>
   </div>

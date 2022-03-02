@@ -14,7 +14,10 @@ export const intiAppState : AppState = {
     password: '',
     rol: ''
   },
-  userList : [{username : 'holamundo', password : 'holamundo', rol: 'admin'}]
+  userList : [
+    {username : 'holamundo', password : 'holamundo', rol: 'admin'},
+    {username : 'user', password : 'holamundo', rol: 'user'}
+]
 };
 
   export const managerUserReducer = createReducer(
@@ -23,8 +26,7 @@ export const intiAppState : AppState = {
       let newState : AppState = _.cloneDeep(state);
       let foundUser = isValidUser(user, state);
       if (foundUser) {
-        newState.loginUser = user;
-        _.set(newState.loginUser, 'rol', foundUser.rol);
+        newState.loginUser = foundUser;
       }return newState;
     }),
     on(loginActions.addUser, (state, { user }) => {
