@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 import { Observable, Subscription } from 'rxjs';
+import { AppState } from 'src/app/app.state';
 import { IShip } from 'src/app/models/ship.model';
 import { DataService } from 'src/app/services/data.service';
+import { getShipList } from '../application/store/ships.selector';
+import * as loginActions from '../application/store/store.actions';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +19,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   dataSuscription!: Subscription;
   ships = new Array<IShip>();
+  ships$ = new Observable<Array<IShip>>();
   searchResults = new Array<IShip>();
   type = '';
   searchResults$ = new Observable<any>();
@@ -25,11 +31,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store<{store : AppState}>,
+
   ) {}
 
   ngOnInit(): void {
-    this.getShips();
+    this.loadShips();
     this.initObservables();
   }
 
@@ -39,9 +47,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.searchResults$.subscribe((value) => {this.filterShips(value)});
   }
 
-  getShips = () => this.dataSuscription = this.dataService.getShips().subscribe((ships) => {
-    this.ships = ships;
-    this.searchResults = this.ships;
+  loadShips = () => this.dataSuscription = this.dataService.getShips().subscribe((ships) => {
+    this.store.dispatch(loginActions.loadShips({shipList: ships}));
+    this.ships$ = this.store.select(getShipList);
+    this.ships$.subscribe((data) => {
+      this.ships = data
+      this.searchResults = data
+    });
   });
 
   getTypes = () => { return ['--Seleccionar--','Cargo', 'Barge', 'Tug' , 'High Speed Craft']};
@@ -114,11 +126,16 @@ unitTest ?
 rutas hijas del login OK
 directiva custom (estructural) para seleccionar tipo de usuario mostrar o ocultar cosas OK
 directivas de atributo (comportamiento) -> cambiar color de texto segun rol OK
+
+ngrx tiene selectores, entonces hacer un selector que te traiga la info de los barcos
+revisar más sobre rutas
+
 función logout?
-Serviio de autenticación?
+servicio de autenticación con token?
 
 repasar funcinamiento servicios
 typescript generics
+
 rest operator OK
 
  */

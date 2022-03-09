@@ -23,7 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { StoreModule } from '@ngrx/store';
 import { UserManagerComponent } from './components/user-manager/user-manager.component';
 import { environment } from 'src/environments/environment';
-import * as reducers from 'src/app/components/application/store/user.reducer';
+import * as reducers from 'src/app/components/application/store/store.reducer';
 import { RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardModule } from './components/dashboard/dashboard.module';

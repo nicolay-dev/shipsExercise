@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
-import { AppState } from '../application/store/user.reducer';
+import { AppState } from '../application/store/store.reducer';
 
 @Component({
   selector: 'app-header',

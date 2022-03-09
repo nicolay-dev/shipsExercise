@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user.model';
-import { AppState } from '../application/store/user.reducer';
+import { AppState } from '../application/store/store.reducer';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as loginActions from '../application/store/user.actions';
+import * as loginActions from '../application/store/store.actions';
 import * as _ from 'lodash';
 
 

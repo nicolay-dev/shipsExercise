@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as _ from 'lodash';
 import { User } from 'src/app/models/user.model';
-import * as addUserActions from '../application/store/user.actions';
-import { AppState } from '../application/store/user.reducer';
+import * as addUserActions from '../application/store/store.actions';
+import { AppState } from '../application/store/store.reducer';
 
 
 @Component({
