@@ -51,8 +51,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.store.dispatch(loginActions.loadShips({shipList: ships}));
     this.ships$ = this.store.select(getShipList);
     this.ships$.subscribe((data) => {
-      this.ships = data
-      this.searchResults = data
+      this.ships = data;
+      this.searchResults = data;
     });
   });
 
